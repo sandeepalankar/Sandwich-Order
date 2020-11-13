@@ -1,12 +1,10 @@
-/**
- * 
- */
 package SandwichOrder;
 
 /**
- * @author gdeub
+ * This enum class lists the extras which can be placed on a sandwich.
+ * @author Graham Deubner, Sandeep Alankar
  *
  */
-public class Extra {
-
+public enum Extra {
+    LETTUCE, TOMATO, ONION, BACON, MUSHROOMS, SPINACH, PICKLES, PROVOLONE, AMERICAN, SWISS
 }

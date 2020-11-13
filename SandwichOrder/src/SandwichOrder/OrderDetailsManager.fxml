@@ -1,8 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="SandwichOrder.OrderDetailsManager">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<BorderPane prefHeight="560.0" prefWidth="673.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SandwichOrder.OrderDetailsControler">
+   <center>
+      <AnchorPane prefHeight="560.0" prefWidth="409.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutY="4.0" prefHeight="560.0" prefWidth="673.0">
+               <children>
+                  <ListView fx:id="orderList" prefHeight="463.0" prefWidth="653.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </ListView>
+                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="658.0">
+                     <children>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="91.0" prefWidth="226.0">
+                           <children>
+                              <Button fx:id="backButton" mnemonicParsing="false" text="  Back  " onAction="#closeWindow">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Label prefHeight="17.0" prefWidth="51.0" />
+                              <Button fx:id="clearButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text=" Clear " onAction="#clearOrder">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="91.0" prefWidth="162.0">
+                           <children>
+                              <Button fx:id="duplicateButton" mnemonicParsing="false" text="Duplicate" onAction="#duplicateItem">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button fx:id="removeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Remove" onAction="#removeItem">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="91.0" prefWidth="247.0">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="78.0" text="Order Total: $">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="orderTotalDisplay" alignment="CENTER_RIGHT" editable="false">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <Button fx:id="exportButton" mnemonicParsing="false" text="Export Order to File" onAction="#exportOrder">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

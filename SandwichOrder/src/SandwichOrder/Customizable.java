@@ -4,7 +4,8 @@
 package SandwichOrder;
 
 /**
- * @author gdeub
+ * This class is an interface, containing add and remove methods.
+ * @author Graham Deubner, Sandeep Alankar
  *
  */
 public interface Customizable {
