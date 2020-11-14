@@ -47,6 +47,7 @@ public class Order implements Customizable {
     @Override
     public boolean remove(Object obj) {
         boolean success = orderlines.remove((OrderLine)obj);
+        lineNumber--;
         if (success) {
             if(orderlines.size() == 0)
                 lineNumber = 1;
@@ -103,6 +104,16 @@ public class Order implements Customizable {
         for (int i = 0; i < orderlines.size(); i++) {
             orderlines.get(i).setLineNumber(i+1);
         }
+    }
+    
+    /**
+     * This method duplicates a given OrderLine object
+     * @param old The OrderLine object to be duplicated
+     * @return the duplicate OrderLine object
+     */
+    public OrderLine duplicate(OrderLine old) {
+        OrderLine duplicate = new OrderLine(lineNumber, old.getSandwich());
+        return duplicate;
     }
     
     /**

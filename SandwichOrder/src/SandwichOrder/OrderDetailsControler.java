@@ -1,14 +1,9 @@
 package SandwichOrder;
-import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -23,10 +18,9 @@ import javafx.stage.Stage;
 public class OrderDetailsControler {
 
 	private Order order = null;
-	private OrderController orderController = null;
 	private DecimalFormat df = null;
 
-	ObservableList<OrderLine> list = null;
+	private ObservableList<OrderLine> list = null;
 
 	@FXML
 	private ListView<OrderLine> orderList;
@@ -50,16 +44,15 @@ public class OrderDetailsControler {
 	private Button exportButton;
 	
 	/**
-	 * 
-	 * @param event
+	 * This method sets the is to be used by the OrderController to pass the OrderDetailsController
+	 * a reference to the OrderController.
 	 */
 	public void setView1Controller(OrderController obj) {
 		order = obj.getOrder();		
 	}
 
 	/**
-	 * 
-	 * @param event
+	 * This method fills the OrderList with the initial orderList objects.
 	 */
 	public void slowInitiate() {
 		try { 			
@@ -72,22 +65,31 @@ public class OrderDetailsControler {
 		}
 	}
 
+	/**
+	 * This method clears the orderList.
+	 */
 	@FXML
-	void clearOrder(ActionEvent event) {
-		if(orderController != null) {
-			orderList.getItems().clear();
-			order.clear();
+	void clearOrder() {
+		if(order != null) {
+		    orderList.getItems().removeAll(orderList.getItems());
+		    order.clear();
 		}
 	}
 
+	/**
+	 * This method closes the orderDetailsWindow.
+	 */
 	@FXML
-	void closeWindow(ActionEvent event) {
+	void closeWindow() {
 		Stage stage = (Stage) backButton.getScene().getWindow();
 		stage.close();
 	}
 
+	/**
+	 * This method removes an OrderLine from the OrderLine list.
+	 */
 	@FXML
-	void removeItem(ActionEvent event) {
+	void removeItem() {
 		OrderLine selected = orderList.getSelectionModel().getSelectedItem();
 		if (selected != null) {
 			order.remove(selected);
@@ -96,22 +98,29 @@ public class OrderDetailsControler {
 		}
 	}
 
+	/**
+	 * This method duplicates a selected OrderLine in the list of OrderLines.
+	 */
 	@FXML
-	void duplicateItem(ActionEvent event) {
+	void duplicateItem() {
 		OrderLine selected = orderList.getSelectionModel().getSelectedItem();
 		if (selected != null) {
-			order.add(selected);
-			orderList.getItems().add(selected);
+		    OrderLine duplicate = order.duplicate(selected);
+			order.add(duplicate);
+			orderList.getItems().add(duplicate);
 			orderTotalDisplay.setText(df.format(order.getTotal()));
 		}
 	}
 
+	/**
+	 * This method exports the current order to the file "SandwichOrderExport.txt" and clears the order.
+	 */
 	@FXML
 	void exportOrder() {
-		if(orderController != null) {
+		if(order != null) {
 			try {
 				order.exportOrder("SandwichOrderExport.txt"); 
-				orderList.getItems().clear();
+	            orderList.getItems().removeAll(orderList.getItems());
 				order.clear();
 			} catch(Exception e) {
 				e.printStackTrace();

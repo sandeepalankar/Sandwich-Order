@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -30,13 +32,13 @@ import javafx.stage.Stage;
  */
 public class OrderController implements Initializable {
 
-	Sandwich mySandwich = new Chicken();
+	private Sandwich mySandwich = new Chicken();
 
 	private Order order = null;
 
 	private DecimalFormat df = null;	
 
-	ObservableList<String> list = FXCollections.observableArrayList();
+	private ObservableList<String> list = FXCollections.observableArrayList();
 
 	@FXML
 	private ComboBox<String> sandwichType;
@@ -306,7 +308,7 @@ public class OrderController implements Initializable {
 
 	/**
 	 * This method opens the second "Order Details" window where the user can see all of the sandwiches 
-	 * added to the current order.
+	 * added to the current order. Background window may not be accessed while second window is open.
 	 */
 	@FXML
 	private void openOrderDetails(ActionEvent event) {
@@ -328,6 +330,8 @@ public class OrderController implements Initializable {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			newStage.setScene(scene);
 			newStage.setTitle("Order Display");
+			newStage.initModality(Modality.WINDOW_MODAL);
+			newStage.initOwner(((Node)event.getSource()).getScene().getWindow() );
 			newStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
