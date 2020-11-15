@@ -100,7 +100,7 @@ public class Order implements Customizable {
     /**
      * This method updates the line number of an order to its index in the orderlines ArrayList.
      */
-    public void updateLineNumbers() {
+    private void updateLineNumbers() {
         for (int i = 0; i < orderlines.size(); i++) {
             orderlines.get(i).setLineNumber(i+1);
         }
