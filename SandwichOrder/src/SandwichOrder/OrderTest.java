@@ -5,6 +5,8 @@ package SandwichOrder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,6 +24,8 @@ class OrderTest {
 		Order order = new Order();
 		Sandwich sandwich = new Chicken();
 		assertTrue(order.add(new OrderLine(order.getLineNumber(), sandwich))); 	
+		String notAnOrderLineObject = "I am not an OrderLine object";
+		assertFalse(order.add(notAnOrderLineObject));
 		//successful add should	return true
 	}
 
@@ -112,7 +116,14 @@ class OrderTest {
 	 */
 	@Test
 	void testExportOrder() {
-		fail("Not yet implemented");
+	    Order order = new Order();
+        Sandwich sandwich = new Chicken();
+        order.add(new OrderLine(order.getLineNumber(), sandwich));
+        assertTrue(order.exportOrder("testExport.txt"));
+        File testFile = new File("testExport.txt");
+        assertTrue(testFile.exists());
+        testFile.delete();
+        assertFalse(order.exportOrder("$&@!?><||/////"));
 	}
 
 }
