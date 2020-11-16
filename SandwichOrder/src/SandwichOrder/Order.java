@@ -30,13 +30,16 @@ public class Order implements Customizable {
      */
     @Override
     public boolean add(Object obj) {
-    	lineNumber++;
+    	if(!(obj instanceof OrderLine))
+    	    return false;
+        lineNumber++;
         boolean success = orderlines.add((OrderLine)obj);
         if(success) {            
             return true;
+        }else {
+            lineNumber--;
+            return false;
         }
-        lineNumber--;
-        return false;
     }
 
     /**
@@ -126,13 +129,13 @@ public class Order implements Customizable {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(file);
+            for(OrderLine l : orderlines) {
+                pw.println(l.toString());
+            }
+            pw.close();
         }catch(Exception e) {
             return false;
         }
-        for(OrderLine l : orderlines) {
-            pw.println(l.toString());
-        }
-        pw.close();
         return true;
     }
 }
